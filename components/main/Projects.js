@@ -7,7 +7,7 @@ const projects = [
         link: 'https://spotify-clone-yuri-corredor.vercel.app/',
         color: '#1ed760',
         title: "SPOTIFY 2.0 (clone)",
-        description: "With the spotify API, I decided to clone their Web App spotify's interface and some of its main features. Because of their API limitations, to use the clone you've to have Spotify Premium and a spotify device running.",
+        description: "I have used the Spotify API to replicate the Spotify web app's interface and some of its key features. Due to limitations in the API, it is necessary to have a Spotify Premium subscription and a Spotify-enabled device to use the clone.",
         techs: [
             'Next.js',
             'NextAuth.js',
@@ -22,7 +22,7 @@ const projects = [
         link: 'https://front-end-challenge-lac.vercel.app/',
         color: '#5c16c5',
         title: "SEARCH TOP MOVIES",
-        description: "With the TMDB API, I developed a website where the user can search for movies using filters. The app consumes the API and the site is server side rendered.",
+        description: "Using the TMDB API, I developed a dynamic website that allows users to search for movies using various filters. The website consumes the API and utilizes server-side rendering for improved performance and user experience.",
         techs: [
             'Next.js',
             'React',
@@ -37,7 +37,7 @@ const projects = [
         link: 'https://fablec-site.vercel.app/',
         color: '#FF7A00',
         title: "FABLEC",
-        description: "I was contracted to do a marketing campaign to this company and then they decided to extend the contract and asked for a simple website where they could display their services. So this was what I did.",
+        description: "I was initially contracted to execute a marketing campaign for a company, however, they subsequently extended the contract and requested that I develop a simple website to showcase their services. This is the outcome of that request.",
         techs: [
             'Next.js',
             'Nodemailer',
@@ -52,7 +52,7 @@ const projects = [
         link: null,
         color: '#007FE3',
         title: "CHAT APP",
-        description: "This app was created using Facebook's technology React Native and it's a study case for learning real time communication between users. It uses, of course, react native and a backend in Python with the Flask framework.",
+        description: "This app was developed using Facebook's React Native technology, and serves as a case study for learning real-time communication between users. It utilizes React Native for the front-end and a Python-based backend built with the Flask framework.",
         techs: [
             'React-native',
             'Redux',
