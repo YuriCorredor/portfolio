@@ -1,6 +1,6 @@
 import { BiLinkExternal } from 'react-icons/bi'
 import { SiGithub } from 'react-icons/si'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 
