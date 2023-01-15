@@ -28,12 +28,14 @@ export default function About() {
                     <div className="order-1 md:order-2 ">
                         <h1 ref={titleRef} className="text-center font-home p-6 md:p-12 pt-0 px-2 text-4xl sm:text-6xl font-bold">ABOUT ME</h1>
                         <p className="px-4 sm:px-16 pb-8 font-bold">
-                            Ambitious software developer with passion for learning new skills. 
-                            Obsessed with application security and automating tasks. Experienced in 
-                            creating web apps and mobile apps using Meta's technology "React" and "React Native". 
-                            Bringing forth a motivated attitude and a variety of powerful skills. I love doing a lot of 
-                            things, and one of them is reading Sci-Fi books. After reading Project Hail Mary by Andy Weir, 
-                            I was inspired to do my personal portfolio. So here it is.
+                        I am an ambitious software developer with a passion for learning new 
+                        skills and staying up-to-date with the latest technologies. I have a 
+                        strong focus on application security and automation, and I am experienced 
+                        in building web and mobile apps using React and React Native. I bring a 
+                        positive attitude and a wide range of powerful skills to every project. 
+                        In my free time, I enjoy reading science fiction books, and it was the 
+                        inspiration from reading Andy Weir's "Project Hail Mary" that led me to 
+                        create my personal portfolio.
                         </p>
                     </div>
                 </div>
