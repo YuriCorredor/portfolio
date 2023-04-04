@@ -6,7 +6,7 @@ export default function Nav() {
     const navBar = useRef()
     const [menuOpen, setMenuOpen] = useState(false)
     const [prevScroll, setPrevScroll] = useState(0)
-    
+
     const handleMenuClick = () => {
         if(!menuOpen) {
             myMenu.current.classList.add('menuopen')
@@ -37,12 +37,12 @@ export default function Nav() {
             document.removeEventListener('scroll', handleScroll, false)
         }
     }, [handleScroll])
-    
+
 
     return (
         <nav ref={navBar} className="flex fixed w-full text-white z-[10010] transition-all">
             <div className={`w-full justify-center flex p-4 bg-black bg-opacity-75 border-b-[1px] ${menuOpen ? 'h-[308px] md:h-fit' : 'h-[69px]'} transition-all`}>
-                <div className="max-w-7xl w-full justify-between xl:justify-around flex-row hidden md:flex">
+                <div className="max-w-7xl w-full justify-between flex-row hidden md:flex">
                     <div className="flex font-nav text-3xl font-extrabold">
                         <a href="#" className="cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">
                             <span >{'<'}</span>
