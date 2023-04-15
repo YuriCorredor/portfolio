@@ -1,11 +1,8 @@
-export default function Custom404() {
-  return null
-}
+import { useEffect } from 'react'
 
-export const getStaticProps = () => {
-  return {
-    redirect: {
-      destination: '/',
-    },
-  }
+export default function Custom404() {
+  useEffect(() => {
+    window.location.href = '/'
+  })
+  return null
 }
