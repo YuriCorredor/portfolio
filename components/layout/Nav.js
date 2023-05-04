@@ -55,7 +55,6 @@ export default function Nav() {
                         <a href="#about" className="pr-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">About</a>
                         <a href="#skills" className="pr-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Skills</a>
                         <a href="#projects" className="pr-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Projects</a>
-                        <a href="#contact" className="cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Contact</a>
                     </div>
                 </div>
                 <div className={`md:hidden w-full flex flex-col justify-between items-center ${menuOpen ? 'h-[275px]' : 'h-[35px]'}`}>

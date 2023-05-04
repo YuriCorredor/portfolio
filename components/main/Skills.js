@@ -2,50 +2,29 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { motion, useAnimation } from 'framer-motion'
 import { 
-    SiExpress, 
-    SiJavascript, 
     SiMongodb, 
     SiNextdotjs, 
     SiPython, 
-    SiFlask, 
-    SiSqlite, 
+    SiPostgresql, 
     SiTailwindcss, 
     SiReact, 
     SiHtml5,
     SiCss3,
     SiGit,
-    SiPostman,
-    SiRedux,
-    SiThreedotjs
+    SiThreedotjs,
+    SiTypescript,
+    SiAmazonaws,
+    SiRuby,
+    SiAmazondynamodb,
 } from 'react-icons/si'
-import { FaNode } from 'react-icons/fa'
+import { TbBrandGolang } from 'react-icons/tb'
 import SkillsItem from './skills/SkillsItem'
 
 const skills = [
     {
-        name: 'expressjs',
-        Icon: SiExpress,
-        color: 'white'
-    },
-    {
-        name: 'javascript',
-        Icon: SiJavascript,
-        color: '#ead41c'
-    },
-    {
-        name: 'nodejs',
-        Icon: FaNode,
-        color: '#89bb3c'
-    },
-    {
-        name: 'mongodb',
-        Icon: SiMongodb,
-        color: '#359e40'
-    },
-    {
-        name: 'nextjs',
-        Icon: SiNextdotjs,
-        color: 'white'
+        name: 'typescript',
+        Icon: SiTypescript,
+        color: '#3178C6'
     },
     {
         name: 'python',
@@ -53,14 +32,39 @@ const skills = [
         color: '#346998'
     },
     {
-        name: 'flask',
-        Icon: SiFlask,
-        color: 'white'
+        name: 'ruby',
+        Icon: SiRuby,
+        color: '#CC342D'
     },
     {
-        name: 'sqlite',
-        Icon: SiSqlite,
-        color: '#6bb6df'
+        name: 'golang',
+        Icon: TbBrandGolang,
+        color: '#00ADD8'
+    },
+    {
+        name: 'aws',
+        Icon: SiAmazonaws,
+        color: '#FF9900'
+    },
+    {
+        name: 'dynamodb',
+        Icon: SiAmazondynamodb,
+        color: '#4053D6'    
+    },
+    {
+        name: 'mongodb',
+        Icon: SiMongodb,
+        color: '#359e40'
+    },
+    {
+        name: 'postgresql',
+        Icon: SiPostgresql,
+        color: '#336791'
+    },
+    {
+        name: 'nextjs',
+        Icon: SiNextdotjs,
+        color: 'white'
     },
     {
         name: 'tailwind',
@@ -86,16 +90,6 @@ const skills = [
         name: 'git',
         Icon: SiGit,
         color: '#f24c2d'
-    },
-    {
-        name: 'postman',
-        Icon: SiPostman,
-        color: '#e66637'
-    },
-    {
-        name: 'redux',
-        Icon: SiRedux,
-        color: '#7046b2'
     },
     {
         name: 'threejs',

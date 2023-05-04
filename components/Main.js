@@ -11,7 +11,6 @@ export default function Main() {
             <About />
             <Skills />
             <Projects />
-            <Contact />
         </>
     )
 }

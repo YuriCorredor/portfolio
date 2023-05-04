@@ -31,11 +31,10 @@ export default function About() {
                         I am an ambitious software developer with a passion for learning new 
                         skills and staying up-to-date with the latest technologies. I have a 
                         strong focus on application security and automation, and I am experienced 
-                        in building web and mobile apps using React and React Native. I bring a 
-                        positive attitude and a wide range of powerful skills to every project. 
-                        In my free time, I enjoy reading science fiction books, and it was the 
-                        inspiration from reading Andy Weir's "Project Hail Mary" that led me to 
-                        create my personal portfolio.
+                        in building web and mobile apps. I bring a positive attitude and a wide range 
+                        of powerful skills to every project. In my free time, I enjoy reading science 
+                        fiction books, and it was the inspiration from reading Andy Weir's "Project Hail 
+                        Mary" that led me to create my personal portfolio.
                         </p>
                     </div>
                 </div>

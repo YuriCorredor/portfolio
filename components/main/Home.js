@@ -3,6 +3,7 @@ import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollIcon from './home/ScrollIcon'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
+import { FaBlogger } from 'react-icons/fa'
 
 const divVariants = {
     hidden: {
@@ -57,7 +58,7 @@ export default function Home() {
                 initial="hidden"
                 animate={controls}
                 ref={ref} 
-                className='flex justify-center mx-auto border-x-0 2xl:border-x-2 bg-home w-full h-[640px] bg-cover text-white'
+                className='flex justify-center mx-auto bg-home w-full h-[640px] bg-cover text-white'
             >
                 <motion.div
                     variants={innerDivVariants}
@@ -73,6 +74,9 @@ export default function Home() {
                         </a>
                         <a rel="noreferrer" target="_blank" href='https://www.linkedin.com/in/yuri-corredor/' className={`px-2 hover:scale-125 cursor-pointer transition-all`}>
                             <SiLinkedin color='white' size={30} />
+                        </a>
+                        <a rel="noreferrer" target="_blank" href='https://blog.yuricorredor.com.br' className={`px-2 hover:scale-125 cursor-pointer transition-all`}>
+                            <FaBlogger color='white' size={30} />
                         </a>
                     </div>
                 </motion.div>
