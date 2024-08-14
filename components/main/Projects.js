@@ -34,21 +34,6 @@ const projects = [
         bgPath: '/movies.jpg'
     },
     {
-        link: 'https://fablec-site.vercel.app/',
-        color: '#FF7A00',
-        title: "FABLEC",
-        description: "I was initially contracted to execute a marketing campaign for a company, however, they subsequently extended the contract and requested that I develop a simple website to showcase their services. This is the outcome of that request.",
-        techs: [
-            'Next.js',
-            'Nodemailer',
-            'Tailwind',
-            'Yup',
-            'Formik'
-        ],
-        gitLink: 'https://github.com/YuriCorredor/fablec',
-        bgPath: '/fablec.jpg'
-    },
-    {
         link: null,
         color: '#007FE3',
         title: "CHAT APP",
@@ -74,7 +59,7 @@ export default function Projects() {
         <section id="projects" className="flex flex-col justify-center items-center w-full mt-8">
             <div className="max-w-7xl w-full flex flex-col justify-center items-center z-[9999] mt-14 overflow-hidden">
                 <ProjectsTitle />
-                {projects.map((project, index) => <ProjectItem 
+                {projects.map((project, index) => <ProjectItem
                     key={index}
                     link={project.link}
                     color={project.color}
