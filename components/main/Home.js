@@ -52,19 +52,19 @@ export default function Home() {
     return (
         <>
         <ScrollIcon />
-        <section id="home" className='flex text-center justify-center items-center w-full mt-28 font-home max-w-[1536px] mx-auto'>
+        <section id="home" className='flex text-center justify-center items-center w-full mt-28 font-home max-w-[1536px] mx-auto relative'>
             <motion.div
                 variants={divVariants}
                 initial="hidden"
                 animate={controls}
                 ref={ref} 
-                className='flex justify-center mx-auto bg-home w-full h-[640px] bg-cover text-white'
+                className='flex justify-center mx-auto bg-home w-full h-[calc(100vh-112px)] min-h-[640px] bg-center bg-cover bg-no-repeat text-white relative'
             >
                 <motion.div
                     variants={innerDivVariants}
                     initial="hidden"
                     animate={controls}
-                    className='z-[9999] justify-center flex flex-col p-3 m-2 h-fit bg-black bg-opacity-75 rounded-md'
+                    className='z-[9999] justify-center flex flex-col p-6 sm:p-8 m-4 h-fit bg-black bg-opacity-75 rounded-lg backdrop-blur-sm'
                 >
                     <h1 className='text-4xl sm:text-6xl font-bold'>Yuri Corredor</h1>
                     <h3 className='text-xl sm:text-2xl'>Developer</h3>
@@ -80,6 +80,11 @@ export default function Home() {
                         </a>
                     </div>
                 </motion.div>
+                {/* Gradient overlays for fade effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
+                <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent opacity-80"></div>
             </motion.div>
         </section>
         </>
