@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollIcon from './home/ScrollIcon'
+import TypeWriter from './home/TypeWriter'
 import { SiGithub, SiLinkedin } from 'react-icons/si'
 import { FaBlogger } from 'react-icons/fa'
+import { HiDownload } from 'react-icons/hi'
 
 const divVariants = {
     hidden: {
@@ -64,20 +66,64 @@ export default function Home() {
                     variants={innerDivVariants}
                     initial="hidden"
                     animate={controls}
-                    className='z-[9999] justify-center flex flex-col p-6 sm:p-8 m-4 h-fit bg-black bg-opacity-75 rounded-lg backdrop-blur-sm'
+                    className='z-[9999] justify-center flex flex-col p-6 sm:p-8 m-4 h-fit bg-gradient-to-br from-black/90 to-gray-900/80 rounded-lg backdrop-blur-sm border border-gray-800/30 shadow-xl'
                 >
-                    <h1 className='text-4xl sm:text-6xl font-bold'>Yuri Corredor</h1>
-                    <h3 className='text-xl sm:text-2xl'>Developer</h3>
-                    <div className='flex flex-wrap self-end my-2 w-full justify-center'>
-                        <a rel="noreferrer" target="_blank" href='https://github.com/YuriCorredor' className={`px-2 hover:scale-125 cursor-pointer transition-all`}>
-                            <SiGithub color='white' size={30} />
+                    <h1 className='text-4xl sm:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent'>
+                        Yuri Corredor
+                    </h1>
+                    <h3 className='text-xl sm:text-2xl text-gray-300 mt-2'>
+                        <TypeWriter 
+                            words={[
+                                "Full Stack Developer",
+                                "React Specialist",
+                                "Problem Solver",
+                                "Tech Enthusiast"
+                            ]} 
+                        />
+                    </h3>
+                    <div className='flex flex-col gap-4 items-center mt-6'>
+                        <a
+                            href="/YuriCorrector_CV.pdf"
+                            download
+                            className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center gap-2 transition-all hover:scale-105"
+                        >
+                            <HiDownload className="animate-bounce" />
+                            Download CV
                         </a>
-                        <a rel="noreferrer" target="_blank" href='https://www.linkedin.com/in/yuri-corredor/' className={`px-2 hover:scale-125 cursor-pointer transition-all`}>
-                            <SiLinkedin color='white' size={30} />
-                        </a>
-                        <a rel="noreferrer" target="_blank" href='https://blog.yuricorredor.com.br' className={`px-2 hover:scale-125 cursor-pointer transition-all`}>
-                            <FaBlogger color='white' size={30} />
-                        </a>
+                        <div className='flex gap-4 justify-center'>
+                            <a 
+                                rel="noreferrer" 
+                                target="_blank" 
+                                href='https://github.com/YuriCorredor' 
+                                className="group relative"
+                            >
+                                <SiGithub className="text-white hover:text-gray-300 w-8 h-8 transition-all hover:scale-125" />
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                    GitHub
+                                </span>
+                            </a>
+                            <a 
+                                rel="noreferrer" 
+                                target="_blank" 
+                                href='https://www.linkedin.com/in/yuri-corredor/' 
+                                className="group relative"
+                            >
+                                <SiLinkedin className="text-white hover:text-gray-300 w-8 h-8 transition-all hover:scale-125" />
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                    LinkedIn
+                                </span>
+                            </a>
+                            <a 
+                                rel="noreferrer" 
+                                target="_blank" 
+                                href='https://blog.yuricorredor.com.br' 
+                                className="group relative"
+                            >
+                                <FaBlogger className="text-white hover:text-gray-300 w-8 h-8 transition-all hover:scale-125" />
+                                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                                    Blog
+                                </span>
+                            </a>
                     </div>
                 </motion.div>
             </motion.div>
