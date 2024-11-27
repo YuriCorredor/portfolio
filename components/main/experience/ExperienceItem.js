@@ -22,7 +22,7 @@ export default function ExperienceItem({ title, company, location, period, achie
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-4 sm:p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-700/50"
+            className="bg-black/60 backdrop-blur-md rounded-lg p-4 sm:p-6 hover:bg-black/70 transition-all duration-300 border border-white/5 shadow-2xl"
             style={{ transitionDelay: `${index * 50}ms` }}
         >
             <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
@@ -39,11 +39,13 @@ export default function ExperienceItem({ title, company, location, period, achie
                     <li key={i} className="text-gray-300">{achievement}</li>
                 ))}
             </ul>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap gap-2">
                 {technologies.map((tech, i) => (
-                    <span key={i} className="px-2 sm:px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm hover:bg-gray-700 transition-colors">
-                        {tech}
-                    </span>
+                    <div key={i} className="group relative">
+                        <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full hover:bg-black/70 transition-all duration-300 border border-white/5 shadow-2xl">
+                            <span className="text-sm text-gray-300 capitalize">{tech}</span>
+                        </div>
+                    </div>
                 ))}
             </div>
         </motion.div>

@@ -147,7 +147,7 @@ export default function About() {
 
     return (
         <>
-            <section id="about" className="min-h-screen w-full flex items-center justify-center py-20 overflow-hidden">
+            <section id="about" className="min-h-screen w-full flex items-center justify-center pb-20 overflow-hidden">
                 <div className="max-w-7xl w-full text-white z-[9999] px-4">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-12 md:gap-20">
                         <motion.div
@@ -160,7 +160,7 @@ export default function About() {
                             <h1 ref={titleRef} className="text-4xl sm:text-6xl text-white font-home font-bold pb-6 sm:pb-8">
                                 ABOUT ME
                             </h1>
-                            <p className="text-lg text-gray-300 leading-relaxed">
+                            <p className="text-lg text-gray-300 leading-relaxed bg-black/60 backdrop-blur-md rounded-lg p-6 border border-white/5 shadow-2xl">
                                 Full-Stack Developer skilled in building scalable web and mobile applications, with expertise in React, Next.js, Node.js,
                                 Python, and AWS. Proven success in cutting costs, reducing wait times, and enhancing user experiences. Adept at
                                 end-to-end development, system optimization, and creating impactful technical solutions. Passionate about leveraging

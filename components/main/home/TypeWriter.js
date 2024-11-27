@@ -33,5 +33,5 @@ export default function TypeWriter({ words, delay = 100, deleteDelay = 50, pause
         return () => clearTimeout(timeout)
     }, [text, wordIndex, isDeleting, words, delay, deleteDelay, pauseDelay])
 
-    return <span className="typing-text">{text}</span>
+    return <span className="typing-text h-10 text-2xl font-bold">{text}</span>
 }

@@ -41,7 +41,7 @@ export default function Nav() {
 
     return (
         <nav ref={navBar} className="flex fixed w-full text-white z-[10010] transition-all">
-            <div className={`w-full justify-center flex p-4 bg-black bg-opacity-75 border-b-[1px] ${menuOpen ? 'h-[308px] md:h-fit' : 'h-[69px]'} transition-all`}>
+            <div className={`w-full justify-center flex p-4 bg-black/60 backdrop-blur-md border border-white/5 shadow-2xl ${menuOpen ? 'h-[308px] md:h-fit' : 'h-[69px]'} transition-all`}>
                 <div className="max-w-7xl w-full justify-between flex-row hidden md:flex">
                     <div className="flex font-nav text-3xl font-extrabold">
                         <a href="#" className="cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">
@@ -73,7 +73,6 @@ export default function Nav() {
                         <a onClick={handleMenuClick} href="#about" className="p-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">About</a>
                         <a onClick={handleMenuClick} href="#experience" className="p-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Experience</a>
                         <a onClick={handleMenuClick} href="#projects" className="p-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Projects</a>
-                        <a onClick={handleMenuClick} href="#contact" className="p-3 cursor-pointer hover:text-[#ddd] hover:scale-110 transition-all">Contact</a>
                     </div>
                 </div>
             </div>

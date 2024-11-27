@@ -57,16 +57,27 @@ export default function ProjectItem({ link, color, title, description, techs, gi
                     <div style={md ? {backgroundColor: 'inherit', padding: 0} : {backgroundColor: color, padding: '24px'}} className={`${md ? 'ml-0' : inverted ? '-mr-12' : '-ml-12'} rounded-sm flex my-2`}>
                         <p className="font-semibold">{description}</p>
                     </div>
-                    <div className={`${inverted ? 'justify-start' : 'justify-end'} flex flex-wrap self-end my-2 w-full`}>
-                        {techs.map((tech, index) => <p key={index} className={`${inverted ? 'pr-4' : 'pl-4'} font-home text-sm font-semibold`}>{tech}</p>)}
+                    <div className={`${inverted ? 'justify-start' : 'justify-end'} flex flex-wrap gap-2 self-end my-2 w-full`}>
+                        {techs.map((tech, index) => (
+                            <div key={index} className="group relative">
+                                <div className="flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full hover:bg-black/70 transition-all duration-300 border border-white/5 shadow-2xl">
+                                    <span className="text-sm text-gray-300 capitalize">{tech}</span>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className={`${inverted ? 'justify-start' : 'justify-end'} flex flex-wrap self-end my-2 w-full`}>
-                        <a rel="noreferrer" target="_blank" href={gitLink} className={`${inverted ? 'pr-2' : 'pl-2'} hover:scale-125 cursor-pointer transition-all`}>
-                            <SiGithub color={md ? 'white' : color} size={30} />
-                        </a>
-                        <a rel="noreferrer" target="_blank" href={link} className={`${inverted ? 'pr-2' : 'pl-2'} hover:scale-125 cursor-pointer transition-all`}>
-                            <BiLinkExternal color={md ? 'white' : color} size={30} />
-                        </a>
+                        {!!gitLink && (
+                            <a rel="noreferrer" target="_blank" href={gitLink} className={`${inverted ? 'pr-2' : 'pl-2'} hover:scale-125 cursor-pointer transition-all`}>
+                                <SiGithub color={md ? 'white' : color} size={30} />
+                            </a>
+                        )}
+                        {!!link && (
+                            <a rel="noreferrer" target="_blank" href={link} className={`${inverted ? 'pr-2' : 'pl-2'} hover:scale-125 cursor-pointer transition-all`}>
+                                <BiLinkExternal color={md ? 'white' : color} size={30} />
+                            </a>
+                        )}
+                        
                     </div>
                 </div>
             </div>

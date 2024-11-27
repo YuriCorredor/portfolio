@@ -81,9 +81,9 @@ export default function Home() {
                             ]} 
                         />
                     </h3>
-                    <div className='flex flex-col gap-4 items-center mt-6'>
+                    <div className='flex flex-col gap-4 items-center mt-6 mb-2'>
                         <a
-                            href="/YuriCorrector_CV.pdf"
+                            href="/Yuri_Corredor_ENG.docx.pdf"
                             download
                             className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center gap-2 transition-all hover:scale-105"
                         >
