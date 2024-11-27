@@ -71,7 +71,7 @@ export default function Home() {
                     <h1 className='text-4xl sm:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent'>
                         Yuri Corredor
                     </h1>
-                    <h3 className='text-xl sm:text-2xl text-gray-300 mt-2'>
+                    <h3 className='text-xl sm:text-2xl text-gray-300 mt-2 h-14'>
                         <TypeWriter 
                             words={[
                                 "Full Stack Developer",
@@ -124,6 +124,7 @@ export default function Home() {
                                     Blog
                                 </span>
                             </a>
+                        </div>
                     </div>
                 </motion.div>
             </motion.div>
