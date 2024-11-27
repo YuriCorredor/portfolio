@@ -66,7 +66,7 @@ export default function Home() {
                     variants={innerDivVariants}
                     initial="hidden"
                     animate={controls}
-                    className='z-[9999] justify-center flex flex-col p-6 sm:p-8 m-4 h-fit bg-gradient-to-br from-black/90 to-gray-900/80 rounded-lg backdrop-blur-sm border border-gray-800/30 shadow-xl'
+                    className='z-[9999] justify-center flex flex-col p-6 sm:p-8 m-4 h-fit bg-black/60 rounded-lg backdrop-blur-md border border-white/5 shadow-2xl'
                 >
                     <h1 className='text-4xl sm:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent'>
                         Yuri Corredor
