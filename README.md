@@ -2,7 +2,7 @@
 
 ![THumb](/readme/thumb.png)
 
-Visit website [HERE](https://yuricorredor.tech/).
+Visit website [HERE](https://yuricorredor.com.br/).
 
 <br>
 
