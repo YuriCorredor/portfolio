@@ -58,7 +58,7 @@ export default function Home() {
                 initial="hidden"
                 animate={controls}
                 ref={ref} 
-                className='flex justify-center mx-auto bg-home w-full h-[calc(100vh-112px)] min-h-[640px] bg-center bg-cover bg-no-repeat text-white relative'
+                className='flex justify-center mx-auto w-full h-[calc(100vh-112px)] min-h-[640px] text-white relative'
             >
                 <motion.div
                     variants={innerDivVariants}
@@ -80,11 +80,6 @@ export default function Home() {
                         </a>
                     </div>
                 </motion.div>
-                {/* Gradient overlays for fade effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-80"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent opacity-80"></div>
-                <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent opacity-80"></div>
             </motion.div>
         </section>
         </>
