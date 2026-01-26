@@ -1,6 +1,5 @@
 import Main from "../components/Main"
 import Head from "next/head"
-import Script from "next/script"
 
 export default function Index() {
   return (
@@ -21,15 +20,6 @@ export default function Index() {
           content="web developer, web designer, software engineer, freelancer, programmer, platform builder, MVP specialist, automation, tech, Essex, London, contractor, consultant, SaaS builder, backend specialist, TypeScript, node.js, AMQP, TCP, HTTP, websockets, flutter, mobile, react, ios, android, AWS, architect"
         />
       </Head>
-
-      {/* Google AdSense Script */}
-      <Script
-        id="adsense-script"
-        async
-        strategy="beforeInteractive"
-        crossOrigin="anonymous"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4148112278798811"
-      />
 
       <Main />
     </>
