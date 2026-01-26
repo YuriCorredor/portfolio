@@ -26,7 +26,7 @@ export default function Index() {
       <Script
         id="adsense-script"
         async
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         crossOrigin="anonymous"
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4148112278798811"
       />
