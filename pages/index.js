@@ -28,7 +28,7 @@ export default function Index() {
         async
         strategy="afterInteractive"
         crossOrigin="anonymous"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4182724923768639"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4148112278798811"
       />
 
       <Main />
