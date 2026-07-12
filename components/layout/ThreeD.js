@@ -38,7 +38,60 @@ const createGlowTexture = (innerColor, outerColor = 'rgba(0,0,0,0)') => {
     return new THREE.CanvasTexture(canvas);
 };
 
-export default function ThreeD() {
+const createAccretionTexture = () => {
+    const size = 1024;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const center = size / 2;
+
+    ctx.clearRect(0, 0, size, size);
+    ctx.globalCompositeOperation = 'lighter';
+
+    for (let i = 0; i < 420; i++) {
+        const radius = size * (0.19 + Math.pow(Math.random(), 0.72) * 0.28);
+        const start = Math.random() * Math.PI * 2;
+        const length = 0.04 + Math.random() * 0.34;
+        const heat = 1 - (radius - size * 0.19) / (size * 0.28);
+        const alpha = 0.08 + Math.random() * 0.38;
+        const red = 255;
+        const green = Math.round(80 + heat * 175);
+        const blue = Math.round(18 + heat * 210);
+
+        ctx.beginPath();
+        ctx.arc(center, center, radius, start, start + length);
+        ctx.strokeStyle = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+        ctx.lineWidth = 1 + Math.random() * (5 + heat * 5);
+        ctx.lineCap = 'round';
+        ctx.stroke();
+    }
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.encoding = THREE.sRGBEncoding;
+    return texture;
+};
+
+const createLensingTexture = () => {
+    const size = 512;
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+
+    gradient.addColorStop(0, 'rgba(0,0,0,1)');
+    gradient.addColorStop(0.34, 'rgba(0,0,0,1)');
+    gradient.addColorStop(0.405, 'rgba(255,245,220,0.98)');
+    gradient.addColorStop(0.43, 'rgba(255,125,35,0.72)');
+    gradient.addColorStop(0.53, 'rgba(115,75,255,0.16)');
+    gradient.addColorStop(0.72, 'rgba(15,35,110,0.05)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+
+    return new THREE.CanvasTexture(canvas);
+};
+
+export default function ThreeD({ blackHoleStage = 'idle' }) {
     const refContainer = useRef();
     const mixerRef = useRef();
     const modelRef = useRef();
@@ -54,6 +107,9 @@ export default function ThreeD() {
     const galaxiesRef = useRef([]);
     const meteorsRef = useRef([]);
     const ufoRef = useRef(null);
+    const blackHoleRef = useRef(null);
+    const blackHoleStageRef = useRef(blackHoleStage);
+    const blackHoleStartRef = useRef(null);
     const requestRef = useRef();
 
     const mouse = useRef({ x: 0, y: 0 });
@@ -68,6 +124,45 @@ export default function ThreeD() {
     const MODEL_BASE_Y = -1.4;
     const targetCameraY = useRef(CAMERA_BASE_Y);
     const targetModel = useRef({ x: 0, y: MODEL_BASE_Y, z: 0 });
+
+    useEffect(() => {
+        blackHoleStageRef.current = blackHoleStage;
+        if (blackHoleStage === 'idle') {
+            blackHoleStartRef.current = null;
+            const blackHole = blackHoleRef.current;
+            const astronaut = modelRef.current;
+
+            if (blackHole) {
+                blackHole.group.visible = false;
+                blackHole.group.scale.setScalar(0.001);
+                blackHole.group.rotation.set(0, 0, 0);
+                blackHole.lensingMaterial.opacity = 0;
+                blackHole.accretionMaterial.opacity = 0;
+                blackHole.innerRingMaterial.opacity = 0;
+                blackHole.particleMaterial.opacity = 0;
+
+                if (astronaut && blackHole.astronautCaptured && sceneRef.current) {
+                    sceneRef.current.add(astronaut);
+                    astronaut.scale.setScalar(blackHole.astronautBaseScale);
+                    astronaut.position.set(
+                        targetModel.current.x,
+                        targetModel.current.y,
+                        targetModel.current.z
+                    );
+                    astronaut.rotation.set(
+                        modelBaseRotation.current.x,
+                        modelBaseRotation.current.y,
+                        modelBaseRotation.current.z
+                    );
+                    astronaut.visible = true;
+                }
+
+                blackHole.astronautCaptured = false;
+                starLayersRef.current.forEach((layer) => layer.scale.setScalar(1));
+                planetsRef.current.forEach((planet) => planet.orbit.scale.setScalar(1));
+            }
+        }
+    }, [blackHoleStage]);
 
     const handleMouseMove = (event) => {
         mouse.current.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -174,6 +269,7 @@ export default function ThreeD() {
             addAsteroidBelt(scene);
             addMeteors(scene);
             addUfo(scene);
+            addBlackHole(camera);
 
             const clock = new THREE.Clock();
             let previousTime = 0;
@@ -187,11 +283,13 @@ export default function ThreeD() {
 
                 if (mixerRef.current) mixerRef.current.update(deltaTime);
                 if (modelRef.current) {
-                    updateModel(modelRef.current, deltaTime);
-                    const pos = modelRef.current.position;
-                    pos.x += (targetModel.current.x - pos.x) * 0.05;
-                    pos.y += (targetModel.current.y - pos.y) * 0.05;
-                    pos.z += (targetModel.current.z - pos.z) * 0.05;
+                    if (blackHoleStageRef.current === 'idle') {
+                        updateModel(modelRef.current, deltaTime);
+                        const pos = modelRef.current.position;
+                        pos.x += (targetModel.current.x - pos.x) * 0.05;
+                        pos.y += (targetModel.current.y - pos.y) * 0.05;
+                        pos.z += (targetModel.current.z - pos.z) * 0.05;
+                    }
                 }
 
                 planetsRef.current.forEach((planet) => {
@@ -215,6 +313,7 @@ export default function ThreeD() {
 
                 updateMeteors(deltaTime, elapsedTime);
                 updateUfo(deltaTime, elapsedTime);
+                updateBlackHole(deltaTime, elapsedTime);
 
                 camera.position.y += (targetCameraY.current - camera.position.y) * 0.05;
 
@@ -611,14 +710,172 @@ export default function ThreeD() {
         glow.scale.setScalar(3.5);
         group.add(glow);
 
+        // Start on the same flight path used by the animation. This avoids the
+        // first frame jumping from the scene origin and producing a wild bank.
+        group.position.set(
+            20 * Math.sin(2),
+            2 + 9 * Math.sin(1),
+            -80 + 18 * Math.sin(4)
+        );
         scene.add(group);
 
         ufoRef.current = {
             group,
             rimGroup,
             rimMaterials,
-            prevX: 0
+            prevX: group.position.x
         };
+    };
+
+    const addBlackHole = (camera) => {
+        const group = new THREE.Group();
+        group.position.set(0, 0, -8);
+        group.scale.setScalar(0.001);
+        group.visible = false;
+
+        const lensingMaterial = new THREE.SpriteMaterial({
+            map: createLensingTexture(),
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            opacity: 0
+        });
+        const lensing = new THREE.Sprite(lensingMaterial);
+        lensing.scale.setScalar(5.2);
+        lensing.renderOrder = 8;
+        group.add(lensing);
+
+        const horizon = new THREE.Mesh(
+            new THREE.SphereGeometry(1.08, 64, 64),
+            new THREE.MeshBasicMaterial({ color: 0x000000 })
+        );
+        horizon.renderOrder = 10;
+        group.add(horizon);
+
+        const accretionMaterial = new THREE.MeshBasicMaterial({
+            map: createAccretionTexture(),
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+            opacity: 0
+        });
+        const accretion = new THREE.Mesh(new THREE.RingGeometry(1.0, 3.05, 192), accretionMaterial);
+        accretion.rotation.x = 1.18;
+        accretion.renderOrder = 9;
+        group.add(accretion);
+
+        const innerRingMaterial = accretionMaterial.clone();
+        innerRingMaterial.opacity = 0;
+        const innerRing = new THREE.Mesh(new THREE.RingGeometry(1.04, 2.2, 160), innerRingMaterial);
+        innerRing.rotation.x = 1.18;
+        innerRing.rotation.z = Math.PI;
+        innerRing.scale.setScalar(0.94);
+        innerRing.renderOrder = 11;
+        group.add(innerRing);
+
+        const particleCount = 1200;
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 1.3 + Math.pow(Math.random(), 0.6) * 2.8;
+            positions[i * 3] = Math.cos(angle) * radius;
+            positions[i * 3 + 1] = Math.sin(angle) * radius;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 0.16;
+        }
+        const particleGeometry = new THREE.BufferGeometry();
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0xffb15a,
+            size: 0.035,
+            transparent: true,
+            opacity: 0,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        particles.rotation.x = 1.18;
+        group.add(particles);
+
+        camera.add(group);
+        blackHoleRef.current = {
+            group,
+            horizon,
+            lensing,
+            lensingMaterial,
+            accretion,
+            accretionMaterial,
+            innerRing,
+            innerRingMaterial,
+            particles,
+            particleMaterial,
+            astronautCaptured: false,
+            astronautBaseScale: 0.75
+        };
+    };
+
+    const updateBlackHole = (deltaTime, elapsedTime) => {
+        const blackHole = blackHoleRef.current;
+        if (!blackHole || blackHoleStageRef.current === 'idle') return;
+
+        if (blackHoleStartRef.current === null) blackHoleStartRef.current = elapsedTime;
+        const duration = 5.0;
+        const rawProgress = Math.min(1, (elapsedTime - blackHoleStartRef.current) / duration);
+        const progress = 1 - Math.pow(1 - rawProgress, 3);
+        const arrival = THREE.MathUtils.smoothstep(rawProgress, 0, 0.34);
+        const finalExpansion = Math.max(0, (rawProgress - 0.72) / 0.28);
+        const pulse = 1 + Math.sin(elapsedTime * 9) * 0.012 * (1 - rawProgress);
+
+        const astronaut = modelRef.current;
+        if (astronaut && !blackHole.astronautCaptured) {
+            blackHole.astronautCaptured = true;
+            blackHole.astronautBaseScale = astronaut.scale.x;
+            cameraRef.current.add(astronaut);
+            astronaut.position.set(-3.4, -1.45, -5.25);
+            astronaut.rotation.set(-0.45, 0.5, -0.3);
+            astronaut.visible = true;
+        }
+
+        if (astronaut && blackHole.astronautCaptured) {
+            const suctionRaw = Math.min(1, Math.max(0, (rawProgress - 0.08) / 0.67));
+            const suction = suctionRaw * suctionRaw;
+            const baseScale = blackHole.astronautBaseScale;
+
+            astronaut.position.set(
+                THREE.MathUtils.lerp(-3.4, 0, suction),
+                THREE.MathUtils.lerp(-1.45, 0, suction),
+                THREE.MathUtils.lerp(-5.25, -7.72, suction)
+            );
+            astronaut.scale.setScalar(Math.max(0.012, baseScale * (1 - suction * 0.97)));
+            astronaut.rotation.x += deltaTime * (0.8 + suction * 8);
+            astronaut.rotation.y += deltaTime * (1.2 + suction * 12);
+            astronaut.rotation.z += deltaTime * (0.5 + suction * 7);
+            astronaut.visible = suctionRaw < 0.94 && rawProgress < 0.7;
+        }
+
+        blackHole.group.visible = true;
+        blackHole.group.scale.setScalar((0.015 + arrival * 0.985 + finalExpansion * 5.8) * pulse);
+        blackHole.group.rotation.z += deltaTime * (0.08 + progress * 0.35);
+
+        const discOpacity = Math.min(1, arrival * 1.3) * (1 - finalExpansion);
+        blackHole.accretionMaterial.opacity = discOpacity;
+        blackHole.innerRingMaterial.opacity = discOpacity * 0.72;
+        blackHole.lensingMaterial.opacity = Math.min(1, arrival * 1.5) * (1 - finalExpansion);
+        blackHole.particleMaterial.opacity = discOpacity * 0.9;
+
+        blackHole.accretion.rotation.z -= deltaTime * (0.55 + progress * 2.4);
+        blackHole.innerRing.rotation.z += deltaTime * (0.85 + progress * 3.2);
+        blackHole.particles.rotation.z -= deltaTime * (0.25 + progress * 1.8);
+
+        const spaceCollapse = Math.max(0, (rawProgress - 0.25) / 0.75);
+        starLayersRef.current.forEach((layer, index) => {
+            layer.rotation.z += deltaTime * spaceCollapse * (index + 1) * 0.8;
+            layer.scale.setScalar(Math.max(0.06, 1 - spaceCollapse * 0.94));
+        });
+        planetsRef.current.forEach((planet) => {
+            planet.orbit.scale.setScalar(Math.max(0.01, 1 - spaceCollapse));
+            planet.orbit.rotation.y += deltaTime * spaceCollapse * 4;
+        });
     };
 
     // Slow ambient wander: layered sines with incommensurate frequencies trace
@@ -641,7 +898,11 @@ export default function ThreeD() {
         group.position.z = -80 + 18 * Math.sin(t * 0.021 + 4);
 
         // Bank gently into the horizontal drift
-        const velocityX = (group.position.x - ufo.prevX) / Math.max(deltaTime, 0.001);
+        const velocityX = THREE.MathUtils.clamp(
+            (group.position.x - ufo.prevX) / Math.max(deltaTime, 0.001),
+            -3,
+            3
+        );
         ufo.prevX = group.position.x;
         group.rotation.z += (-velocityX * 0.03 - group.rotation.z) * 0.05;
     };
@@ -668,5 +929,5 @@ export default function ThreeD() {
         });
     };
 
-    return <LoaderContainer loading={loading} ref={refContainer} />;
+    return <LoaderContainer loading={loading} blackHoleStage={blackHoleStage} ref={refContainer} />;
 }

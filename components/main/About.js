@@ -200,11 +200,11 @@ export default function About() {
                         >
                             <div className="relative">
                                 <img
-                                    alt="astronaut"
+                                    alt="Astronaut portrait"
                                     ref={imgRef}
-                                    className="relative rounded-lg shadow-2xl"
+                                    className="about-astronaut relative w-full max-w-[400px] h-auto"
                                     width={400}
-                                    src="astronaut.jpg"
+                                    src="/astronaut-transparent.webp"
                                 />
                             </div>
                         </motion.div>
